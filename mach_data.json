@@ -1,0 +1,71 @@
+{
+  "financial_metrics": {
+    "fiscal_year_2025": {
+      "total_revenue": "$1.175 Billion",
+      "net_income": "$143 Million",
+      "adjusted_ebitda": "$593 Million",
+      "lease_operating_expense": "$6.99 per Boe",
+      "total_development_costs": "$252 Million",
+      "proved_reserves_growth": "+109% YoY"
+    },
+    "first_quarter_2026": {
+      "total_revenue": "$286 Million",
+      "net_loss": "$35 Million (affected by $96.9M derivative loss)",
+      "adjusted_ebitda": "$194.6 Million",
+      "average_production": "158 Mboe/d (70% natural gas, 16% oil, 14% NGLs)",
+      "lease_operating_expense": "$7.12 per Boe",
+      "cash_distribution": "$0.64 per common unit (paid June 4, 2026)"
+    }
+  },
+  "business_structure": {
+    "description": "Mach Natural Resources (NYSE: MNR) is structured as a Master Limited Partnership (MLP), focus on acquisition, development, and production of oil, natural gas, and NGLs in the Mid-Continent region.",
+    "how_they_make_money": [
+      "Targeted Acquisition of Proved Developed Producing (PDP) Assets: Purchases mature, low-decline assets from major companies divesting older wells at discounts.",
+      "Optimized Production: Maximizes efficiency and reduces lease operating expenses rather than pursuing high-risk exploratory drilling.",
+      "Disciplined Capital Allocation: Targets net debt-to-EBITDA of 1x or less, reinvesting <=50% of operating cash flow and returning the rest to unitholders as quarterly cash distributions."
+    ]
+  },
+  "advantages": [
+    "Stable Cash Flows: Low-decline assets offer highly predictable cash flows compared to typical high-decline shale operators.",
+    "Tax-Deferred MLP Structure: Distributions are often treated as a return of capital, providing tax advantages for U.S. unitholders (receives a K-1).",
+    "Conservative Leverage & Playbook: Restricts debt-funded purchases at high commodity prices, keeping leverage very low to avoid liquidity traps."
+  ],
+  "risks": [
+    "Commodity Price Fluctuation: Revenues and distribution capabilities are highly sensitive to crude oil, natural gas, and NGL price drops.",
+    "Reserve Depletion: Production depends on successfully acquiring new fields or drilling mature reserves to replace depleted oil/gas pools.",
+    "Regulatory & Environmental Compliance: Upstream operations face strict environmental rules, potentially incurring high mitigation or delay costs.",
+    "Share Dilution: Recent equity issuances (secondary offerings and ATM programs) dilute outstanding common units."
+  ],
+  "news_and_activity": [
+    {
+      "category": "Mach Natural Resources",
+      "title": "Capital Redirection to Oil-Weighted Programs in Kingfisher County",
+      "summary": "Mach Natural Resources announced a pause in some Deep Anadarko gas drilling to restart its Oswego oil-weighted program, optimizing returns.",
+      "date": "May 2026"
+    },
+    {
+      "category": "Major Investors",
+      "title": "Kayne Anderson Capital Advisors Remains Major Institutional Holder",
+      "summary": "Kayne Anderson continues to hold a substantial long position, following partnership in key 2025 asset acquisitions.",
+      "date": "June 2026"
+    },
+    {
+      "category": "Insider Activity",
+      "title": "CEO Tom L. Ward Acquires 153,256 Common Units in Open Market",
+      "summary": "Tom L. Ward continues to increase alignment with unitholders by expanding his personal and trust-based holdings.",
+      "date": "April 2026"
+    },
+    {
+      "category": "Upstream Oil Industry",
+      "title": "U.S. Drilling Rig Rebound & Mid-Continent Uplift",
+      "summary": "U.S. total rig counts grew to approximately 557-562. Granite Wash in Oklahoma recorded notable drilling gains.",
+      "date": "June 2026"
+    },
+    {
+      "category": "Upstream Oil Industry",
+      "title": "WTI Price Volatility Supported by Global Supply Constrains",
+      "summary": "Geopolitical tensions in the Middle East have caused global inventory draws, keeping prices in a highly profitable range for disciplined operators.",
+      "date": "Mid-June 2026"
+    }
+  ]
+}
