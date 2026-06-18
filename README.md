@@ -17,6 +17,7 @@ This project was built using Python Flask, vanilla HTML5, CSS3, and JavaScript a
 * **Backend**: Python, Flask
 * **Frontend**: HTML5, Vanilla CSS3 (Custom Grid Layouts & HSL styling), JavaScript (Fetch API)
 * **Data Store**: Local structured JSON database (`mach_data.json`)
+* **Model**: Gemini 3.5 Flash Low
 
 ## 📦 Getting Started
 
