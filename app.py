@@ -390,7 +390,6 @@ HTML_TEMPLATE = """
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                         Business Structure & Value Creation
                     </h2>
-                    <button class="btn-export" onclick="exportCardToCSV('card-structure', 'business_structure.csv')">Export CSV</button>
                 </div>
                 <p style="color: var(--text-secondary); margin-bottom: 1rem;">{{ data.business_structure.description }}</p>
                 <h3 class="section-subtitle">How MNR Generates Revenue & Distributions:</h3>
@@ -411,7 +410,6 @@ HTML_TEMPLATE = """
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         Strategic & Competitive Advantages
                     </h2>
-                    <button class="btn-export" onclick="exportCardToCSV('card-advantages', 'competitive_advantages.csv')">Export CSV</button>
                 </div>
                 <ul>
                     {% for adv in data.advantages %}
@@ -430,7 +428,6 @@ HTML_TEMPLATE = """
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                         Current Risk Factors
                     </h2>
-                    <button class="btn-export" onclick="exportCardToCSV('card-risks', 'risk_factors.csv')">Export CSV</button>
                 </div>
                 <ul>
                     {% for risk in data.risks %}
@@ -451,7 +448,6 @@ HTML_TEMPLATE = """
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v11"></path><path d="M12 12H5"></path><path d="M16 6v12"></path><path d="M12 8H5"></path></svg>
                         News & Activity Feed
                     </h2>
-                    <button class="btn-export" onclick="exportCardToCSV('card-news', 'news_feed.csv')">Export CSV</button>
                 </div>
                 <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem;">
                     Tracking Mach updates, upstream oil sector, and investor activity.
@@ -532,31 +528,6 @@ HTML_TEMPLATE = """
                     const label = item.querySelector('.metric-label').textContent.trim();
                     const value = item.querySelector('.metric-value').textContent.trim();
                     csvRows.push(['Q1 2026', label, value]);
-                });
-            } else if (cardId === 'card-structure') {
-                csvRows.push(['Key', 'Description']);
-                const desc = card.querySelector('p').textContent.trim();
-                csvRows.push(['Business Overview', desc]);
-                card.querySelectorAll('ol li').forEach(item => {
-                    const title = item.querySelector('.list-item-title').textContent.replace(':', '').trim();
-                    const body = item.textContent.replace(item.querySelector('.list-item-title').textContent, '').trim();
-                    csvRows.push([title, body]);
-                });
-            } else if (cardId === 'card-advantages' || cardId === 'card-risks') {
-                csvRows.push(['Topic', 'Details']);
-                card.querySelectorAll('ul li').forEach(item => {
-                    const title = item.querySelector('.list-item-title').textContent.replace(':', '').trim();
-                    const body = item.textContent.replace(item.querySelector('.list-item-title').textContent, '').trim();
-                    csvRows.push([title, body]);
-                });
-            } else if (cardId === 'card-news') {
-                csvRows.push(['Category', 'Date', 'Title', 'Summary']);
-                card.querySelectorAll('.news-item').forEach(item => {
-                    const category = item.querySelector('.badge').textContent.trim();
-                    const date = item.querySelector('.news-date').textContent.trim();
-                    const title = item.querySelector('.news-title').textContent.trim();
-                    const summary = item.querySelector('.news-summary').textContent.trim();
-                    csvRows.push([category, date, title, summary]);
                 });
             }
             
