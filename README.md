@@ -1,6 +1,6 @@
-# Mach Natural Resources Investor Insights
+# Mach Natural Resources Investor Intelligence Center
 
-This web application compiles and tracks in real-time the actions of major investors, financial metrics, business structure, competitive advantages, risk factors, and news updates for **Mach Natural Resources (NYSE: MNR)**. 
+A premium, modern dark-themed web application that compiles and tracks investor intelligence, financial metrics, business structure, competitive advantages, risk factors, and news updates for **Mach Natural Resources (NYSE: MNR)**. 
 
 This project was built using Python Flask, vanilla HTML5, CSS3, and JavaScript as part of Day 1 of the **5-Day AI Agents Challenge**.
 
