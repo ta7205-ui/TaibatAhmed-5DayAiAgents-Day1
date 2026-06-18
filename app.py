@@ -511,23 +511,53 @@ HTML_TEMPLATE = """
                 });
         }
 
+        function parseNumericValue(valStr) {
+            // Remove dollar signs, percentage signs, and white spaces
+            let clean = valStr.replace(/[\$\%]/g, '').trim();
+            
+            // Check for directional signs like '+' or '-'
+            let multiplier = 1;
+            if (clean.startsWith('-')) {
+                multiplier = -1;
+                clean = clean.substring(1);
+            } else if (clean.startsWith('+')) {
+                clean = clean.substring(1);
+            }
+            
+            // Extract trailing strings for unit checks
+            if (clean.toLowerCase().includes('billion')) {
+                return parseFloat(clean) * 1000000000 * multiplier;
+            } else if (clean.toLowerCase().includes('million')) {
+                return parseFloat(clean) * 1000000 * multiplier;
+            } else if (clean.toLowerCase().includes('per boe')) {
+                return parseFloat(clean.replace('per boe', '').trim()) * multiplier;
+            } else if (clean.toLowerCase().includes('mboe/d')) {
+                // Return Mboe/d converted to boe/d scale (e.g. 158 * 1000)
+                return parseFloat(clean.replace('mboe/d', '').trim()) * 1000 * multiplier;
+            }
+            
+            // Fallback numeric parsing
+            let num = parseFloat(clean);
+            return isNaN(num) ? valStr : num * multiplier;
+        }
+
         function exportCardToCSV(cardId, filename) {
             const card = document.getElementById(cardId);
             let csvRows = [];
             
             if (cardId === 'card-financials') {
-                csvRows.push(['Metric Section', 'Metric Label', 'Value']);
+                csvRows.push(['Metric Section', 'Metric Label', 'Raw Value Display', 'Normalized Number']);
                 // FY 2025
                 card.querySelectorAll('.section-subtitle')[0].nextElementSibling.querySelectorAll('.metric-item').forEach(item => {
                     const label = item.querySelector('.metric-label').textContent.trim();
                     const value = item.querySelector('.metric-value').textContent.trim();
-                    csvRows.push(['FY 2025 (10-K)', label, value]);
+                    csvRows.push(['FY 2025 (10-K)', label, value, parseNumericValue(value)]);
                 });
                 // Q1 2026
                 card.querySelectorAll('.section-subtitle')[1].nextElementSibling.querySelectorAll('.metric-item').forEach(item => {
                     const label = item.querySelector('.metric-label').textContent.trim();
                     const value = item.querySelector('.metric-value').textContent.trim();
-                    csvRows.push(['Q1 2026', label, value]);
+                    csvRows.push(['Q1 2026', label, value, parseNumericValue(value)]);
                 });
             }
             
