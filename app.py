@@ -547,23 +547,39 @@ HTML_TEMPLATE = """
             
             if (cardId === 'card-financials') {
                 csvRows.push(['Metric Section', 'Metric Label', 'Raw Value Display', 'Normalized Number']);
-                // FY 2025
-                card.querySelectorAll('.section-subtitle')[0].nextElementSibling.querySelectorAll('.metric-item').forEach(item => {
-                    const label = item.querySelector('.metric-label').textContent.trim();
-                    const value = item.querySelector('.metric-value').textContent.trim();
-                    csvRows.push(['FY 2025 (10-K)', label, value, parseNumericValue(value)]);
+                
+                // Retrieve all section headers inside the card
+                const headers = card.querySelectorAll('.section-subtitle');
+                
+                headers.forEach(header => {
+                    const sectionName = header.textContent.trim();
+                    // Get the sibling metrics container immediately following the header
+                    const metricsGrid = header.nextElementSibling;
+                    if (metricsGrid && metricsGrid.classList.contains('metrics-subgrid')) {
+                        metricsGrid.querySelectorAll('.metric-item').forEach(item => {
+                            const labelEl = item.querySelector('.metric-label');
+                            const valueEl = item.querySelector('.metric-value');
+                            if (labelEl && valueEl) {
+                                const label = labelEl.textContent.trim();
+                                const value = valueEl.textContent.trim();
+                                csvRows.push([sectionName, label, value, parseNumericValue(value)]);
+                            }
+                        });
+                    }
                 });
-                // Q1 2026
-                card.querySelectorAll('.section-subtitle')[1].nextElementSibling.querySelectorAll('.metric-item').forEach(item => {
-                    const label = item.querySelector('.metric-label').textContent.trim();
-                    const value = item.querySelector('.metric-value').textContent.trim();
-                    csvRows.push(['Q1 2026', label, value, parseNumericValue(value)]);
-                });
+            }
+            
+            if (csvRows.length <= 1) {
+                console.error("No data extracted for CSV export");
+                return;
             }
             
             // Convert to CSV format with escaping
             const csvContent = csvRows.map(row => 
-                row.map(val => `"${val.replace(/"/g, '""')}"`).join(',')
+                row.map(val => {
+                    const strVal = String(val);
+                    return `"${strVal.replace(/"/g, '""')}"`;
+                }).join(',')
             ).join('\n');
             
             // Download mechanism
