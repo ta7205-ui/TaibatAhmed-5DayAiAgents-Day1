@@ -339,7 +339,6 @@ HTML_TEMPLATE = """
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                         Key Financial & Operational Metrics
                     </h2>
-                    <button class="btn-export" onclick="exportCardToCSV('card-financials', 'financial_metrics.csv')">Export CSV</button>
                 </div>
                 
                 <h3 class="section-subtitle">Fiscal Year 2025 (10-K Annual Report)</h3>
@@ -509,91 +508,6 @@ HTML_TEMPLATE = """
                     btnText.textContent = 'Refresh Data';
                     refreshBtn.disabled = false;
                 });
-        }
-
-        function parseNumericValue(valStr) {
-            // Remove dollar signs, percentage signs, and white spaces
-            let clean = valStr.replace(/[\$\%]/g, '').trim();
-            
-            // Check for directional signs like '+' or '-'
-            let multiplier = 1;
-            if (clean.startsWith('-')) {
-                multiplier = -1;
-                clean = clean.substring(1);
-            } else if (clean.startsWith('+')) {
-                clean = clean.substring(1);
-            }
-            
-            // Extract trailing strings for unit checks
-            if (clean.toLowerCase().includes('billion')) {
-                return parseFloat(clean) * 1000000000 * multiplier;
-            } else if (clean.toLowerCase().includes('million')) {
-                return parseFloat(clean) * 1000000 * multiplier;
-            } else if (clean.toLowerCase().includes('per boe')) {
-                return parseFloat(clean.replace('per boe', '').trim()) * multiplier;
-            } else if (clean.toLowerCase().includes('mboe/d')) {
-                // Return Mboe/d converted to boe/d scale (e.g. 158 * 1000)
-                return parseFloat(clean.replace('mboe/d', '').trim()) * 1000 * multiplier;
-            }
-            
-            // Fallback numeric parsing
-            let num = parseFloat(clean);
-            return isNaN(num) ? valStr : num * multiplier;
-        }
-
-        function exportCardToCSV(cardId, filename) {
-            const card = document.getElementById(cardId);
-            let csvRows = [];
-            
-            if (cardId === 'card-financials') {
-                csvRows.push(['Metric Section', 'Metric Label', 'Raw Value Display', 'Normalized Number']);
-                
-                // Retrieve all section headers inside the card
-                const headers = card.querySelectorAll('.section-subtitle');
-                
-                headers.forEach(header => {
-                    const sectionName = header.textContent.trim();
-                    // Get the sibling metrics container immediately following the header
-                    const metricsGrid = header.nextElementSibling;
-                    if (metricsGrid && metricsGrid.classList.contains('metrics-subgrid')) {
-                        metricsGrid.querySelectorAll('.metric-item').forEach(item => {
-                            const labelEl = item.querySelector('.metric-label');
-                            const valueEl = item.querySelector('.metric-value');
-                            if (labelEl && valueEl) {
-                                const label = labelEl.textContent.trim();
-                                const value = valueEl.textContent.trim();
-                                csvRows.push([sectionName, label, value, parseNumericValue(value)]);
-                            }
-                        });
-                    }
-                });
-            }
-            
-            if (csvRows.length <= 1) {
-                console.error("No data extracted for CSV export");
-                return;
-            }
-            
-            // Convert to CSV format with escaping
-            const csvContent = csvRows.map(row => 
-                row.map(val => {
-                    const strVal = String(val);
-                    return `"${strVal.replace(/"/g, '""')}"`;
-                }).join(',')
-            ).join('\n');
-            
-            // Download mechanism
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            if (link.download !== undefined) {
-                const url = URL.createObjectURL(blob);
-                link.setAttribute('href', url);
-                link.setAttribute('download', filename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
         }
     </script>
 </body>
